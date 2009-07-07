@@ -29,14 +29,14 @@ namespace Gibbed.Valve.FileFormats
 
         public void Deserialize(Stream input)
         {
-            if (input.ReadU32() != 0x55AA1234)
+            if (input.ReadValueU32() != 0x55AA1234)
             {
                 input.Seek(-4, SeekOrigin.Current);
             }
             else
             {
-                uint version = input.ReadU32();
-                uint indexSize = input.ReadU32();
+                uint version = input.ReadValueU32();
+                uint indexSize = input.ReadValueU32();
 
                 if (version != 1)
                 {
@@ -49,7 +49,7 @@ namespace Gibbed.Valve.FileFormats
             // Types
             while (true)
             {
-                string typeName = input.ReadASCIIZ();
+                string typeName = input.ReadStringASCIIZ();
                 if (typeName == "")
                 {
                     break;
@@ -58,7 +58,7 @@ namespace Gibbed.Valve.FileFormats
                 // Directories
                 while (true)
                 {
-                    string directoryName = input.ReadASCIIZ();
+                    string directoryName = input.ReadStringASCIIZ();
                     if (directoryName == "")
                     {
                         break;
@@ -67,7 +67,7 @@ namespace Gibbed.Valve.FileFormats
                     // Files
                     while (true)
                     {
-                        string fileName = input.ReadASCIIZ();
+                        string fileName = input.ReadStringASCIIZ();
                         if (fileName == "")
                         {
                             break;
@@ -77,13 +77,13 @@ namespace Gibbed.Valve.FileFormats
                         entry.FileName = fileName;
                         entry.DirectoryName = directoryName.Replace("/", "\\");
                         entry.TypeName = typeName;
-                        entry.CRC32 = input.ReadU32();
-                        entry.SmallData = new byte[input.ReadU16()];
-                        entry.ArchiveIndex = input.ReadU16();
-                        entry.Offset = input.ReadU32();
-                        entry.Size = input.ReadU32();
+                        entry.CRC32 = input.ReadValueU32();
+                        entry.SmallData = new byte[input.ReadValueU16()];
+                        entry.ArchiveIndex = input.ReadValueU16();
+                        entry.Offset = input.ReadValueU32();
+                        entry.Size = input.ReadValueU32();
                         
-                        UInt16 terminator = input.ReadU16();
+                        UInt16 terminator = input.ReadValueU16();
                         if (terminator != 0xFFFF)
                         {
                             throw new FormatException("invalid terminator");

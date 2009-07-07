@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using Gibbed.Valve.Helpers;
+using Gibbed.Helpers;
 
 namespace Gibbed.Valve.Package
 {
@@ -27,7 +27,7 @@ namespace Gibbed.Valve.Package
 	{
 		public List<PackageEntry> Entries;
 
-		public void Read(Stream stream)
+		public void Deserialize(Stream stream)
 		{
 			List<PackageEntry> entries = new List<PackageEntry>();
 

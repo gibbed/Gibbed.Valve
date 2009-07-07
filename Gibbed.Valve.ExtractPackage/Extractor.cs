@@ -7,7 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Gibbed.Valve.Package;
+using Gibbed.Valve.FileFormats;
 
 namespace Gibbed.Valve.ExtractPackage
 {
@@ -88,9 +88,9 @@ namespace Gibbed.Valve.ExtractPackage
 			string basePath = indexName.Substring(0, indexName.Length - 8);
 			string savePath = this.savePathDialog.SelectedPath;
 
-			PackageFile package = new PackageFile();
+            PackageFile package = new PackageFile();
 			Stream indexStream = File.OpenRead(indexName);
-			package.Read(indexStream);
+			package.Deserialize(indexStream);
 			indexStream.Close();
 
 			this.progressBar.Minimum = 0;

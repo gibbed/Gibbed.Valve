@@ -81,13 +81,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gibbed.Valve.Package\Gibbed.Valve.Package.csproj">
-      <Project>{E2C5060B-5259-483E-9406-C1555A83C2FC}</Project>
-      <Name>Gibbed.Valve.Package</Name>
-    </ProjectReference>
+    <Content Include="Extractor.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Extractor.ico" />
+    <ProjectReference Include="..\Gibbed.Valve.FileFormats\Gibbed.Valve.FileFormats.csproj">
+      <Project>{2E79DD4C-F30F-4114-BA1A-45F997512BD0}</Project>
+      <Name>Gibbed.Valve.FileFormats</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
